@@ -1,0 +1,65 @@
+<% layout("layouts/boilerplate") %>
+
+    <div class="row">
+        <h1 class="text-center">Edit Campground</h1>
+    
+        <div class="col-6 offset-3">
+            <form action="/campground/<%=camp._id%>?_method=put" method = "post" novalidate class="form-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Campground name</label>
+                    <input type="text" name="title" id="name" class="form-control" value="<%=camp.title%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label for="place" class="form-label">Location</label>
+                    <input type="text" id="place" name="location" class="form-control" value="<%=camp.location%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label for ="description" class="form-label">Description</label>
+                    <textarea type="text" name="description" id="description" class="form-control" required><%= camp.description %></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Add images</label>
+                    <input type="file" name="image" id="image" multiple>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Rs.</span>
+                  <input type="number" name="price" class="form-control" placeholder="0.00" aria-label="price" aria-describedby="basic-addon1" value="<%= camp.price %>" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+                <div class="mb-3">
+                    <% camp.image.forEach(function(img,i) { %>
+                        <img crossorigin="anonymous" src="<%= img.thumbnail %>" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%= img.filename %>">
+                        </div>
+                        <label for="image-<%=i%>">Delete</label>
+                    <% }) %>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-outline-info">Update</button>
+                </div>
+            </form>
+
+            <div class="mb-3">
+                <a href="/campground/<%=camp._id%>" class="btn btn-outline-secondary">Back</a>
+            </div>
+    
+        </div>
+    </div>
+
+    <!-- <a href="/campground/<%=camp._id%>">Back</a> -->
+
